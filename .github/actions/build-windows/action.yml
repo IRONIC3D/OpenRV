@@ -198,3 +198,12 @@ runs:
     - name: Install OpenRV
       run: cmake --install _build --prefix $(pwd)/_install --config ${{ inputs.build-type }}
       shell: msys2 {0}
+
+    - name: Upload OpenRV Windows artifact
+      uses: actions/upload-artifact@v4
+      with:
+        name: openrv-windows-${{ inputs.vfx-platform }}-${{ inputs.build-type }}
+        path: |
+          _build/stage/app/bin
+          _install
+        if-no-files-found: error
