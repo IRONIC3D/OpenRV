@@ -22,7 +22,7 @@ permissions:
 
 jobs:
   detect-changes:
-    if: github.repository_owner == 'AcademySoftwareFoundation'
+    if: ${{ github.repository_owner == 'AcademySoftwareFoundation' || github.repository_owner == 'IRONIC3D' }}
     runs-on: ubuntu-latest
     outputs:
       cmake_changed: ${{ steps.filter.outputs.cmake }}
@@ -38,7 +38,7 @@ jobs:
               - '**/*.cmake'
 
   windows:
-    if: github.repository_owner == 'AcademySoftwareFoundation'
+    if: ${{ github.repository_owner == 'AcademySoftwareFoundation' || github.repository_owner == 'IRONIC3D' }}
     needs: detect-changes
     uses: ./.github/workflows/ci-windows.yml
     with:
